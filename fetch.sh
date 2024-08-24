@@ -1,9 +1,7 @@
 #!/bin/bash
 
-#Custom Fetch for my machine, might not work properly on other machines.
-
-# Colors
-sky_blue='\033[1;36m'  # Bright cyan (sky blue)
+# Define colors
+arch_blue='\033[38;2;23;147;209m'
 reset='\033[0m'        # Reset to default color
 red='\033[1;31m'
 green='\033[1;32m'
@@ -13,7 +11,7 @@ magenta='\033[1;35m'
 cyan='\033[1;36m'
 white='\033[1;37m'
 
-#ASCII Art Logo
+# Define ASCII art logo
 logo="
                    ▄                   
                   ▟█▙                  
@@ -36,8 +34,8 @@ logo="
  ▟▛▀                               ▀▜▙ 
 "
 
-#System Information
-userhost=$(echo "$(id -un)@$(uname -n)")
+# Define system information
+userhost=$(printf "%s @ %s" "$(id -un | awk '{print toupper(substr($0,1,1)) tolower(substr($0,2))}')" "$(uname -n | awk '{print toupper(substr($0,1,1)) tolower(substr($0,2))}')") 
 os=$(hostnamectl | awk -F ': ' '/Operating System/ {print $2}')
 kernel=$(hostnamectl | awk -F ': ' '/Kernel/ {split($2, a, "-"); print a[1]}')
 host=$(paste -d' ' <(cat /sys/devices/virtual/dmi/id/sys_vendor | awk '{print $1}') <(cat /sys/devices/virtual/dmi/id/product_name))
@@ -105,12 +103,12 @@ while IFS= read -r line; do
     fi
 done <<< "$logo"
 
-# Print Logo and System Information (side by side)
+# Print logo and system information side by side
 IFS=$'\n'  # Set IFS to newline to preserve leading whitespace in the logo
 logo_lines=($logo)
 for (( i=0; i<${#logo_lines[@]}; i++ )); do
-    # Print the logo in sky blue
-    printf "${sky_blue}%-${max_width}s${reset}   " "${logo_lines[i]}"
+    # Print the logo in arch blue
+    printf "${arch_blue}%-${max_width}s${reset}   " "${logo_lines[i]}"
 
     # Print system information in different colors
     case $i in
