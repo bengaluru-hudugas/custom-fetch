@@ -123,7 +123,7 @@ for (( i=0; i<${#logo_lines[@]}; i++ )); do
         12) printf "${yellow}Memory Usage: $mem${reset}" ;;
         13) printf "${blue}Disk Usage: $disk${reset}" ;;
         14) printf "${magenta}Uptime: $uptime${reset}" ;;
-        15) printf "${cyan}DE: $de${reset}" ;;
+        15) printf "${cyan}WM: $de${reset}" ;;
         *) printf "" ;;
     esac
     echo   # Print a newline after each line
