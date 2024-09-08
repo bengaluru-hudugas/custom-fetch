@@ -92,7 +92,7 @@ percent_used=$((100 * used_mem / total_mem))
 mem=$(echo "${used_mem_gb} GB Used / ${percent_used} Percent")
 disk=$(df -h / | grep / | awk '{print $3 "B Used / " $4 "B Free"}')
 uptime=$(uptime -p | sed 's/^up //' | sed 's/,//g' | awk '{for(i=1;i<=NF;i++) $i=toupper(substr($i,1,1)) tolower(substr($i,2));}1')
-de=$(env | grep XDG_CURRENT_DESKTOP= | cut --complement -d "=" -f 1)
+wm=$(env | grep XDG_CURRENT_DESKTOP= | cut --complement -d "=" -f 1)
 
 # Calculate the maximum width of the logo
 max_width=0
@@ -123,7 +123,7 @@ for (( i=0; i<${#logo_lines[@]}; i++ )); do
         12) printf "${yellow}Memory Usage: $mem${reset}" ;;
         13) printf "${blue}Disk Usage: $disk${reset}" ;;
         14) printf "${magenta}Uptime: $uptime${reset}" ;;
-        15) printf "${cyan}WM: $de${reset}" ;;
+        15) printf "${cyan}WM: $wm${reset}" ;;
         *) printf "" ;;
     esac
     echo   # Print a newline after each line
